@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+$branch = (string) shell_exec('git branch --show-current');
+
+preg_match('/trello-(\w+)/', $branch, $matches);
+
+if (!isset($matches[1])) {
+    echo "\nNo trello card!\n";
+
+    return 1;
+}
+
+shell_exec(sprintf('open https://trello.com/c/%s', $matches[1]));
